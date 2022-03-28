@@ -6,7 +6,8 @@ class Api::CatsController < ApplicationController
   end
 
   def randomCats
-    render json: User.random_cat(current_user.liked_cats)
+    @cats = Cat.all - current_user.cats
+    render json: @cats.shuffle
   end
 
   def show
